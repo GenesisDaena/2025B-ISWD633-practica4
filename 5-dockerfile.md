@@ -53,17 +53,28 @@ docker build -t <nombre imagen>:<tag> .
 ### Ejecutar el archivo Dockerfile y construir una imagen en la versión 1.0
 No olvides verificar en qué directorio se encuentra el archivo Dockerfile
 ```
-
+docker build -t miapache:1.0 .
 ```
 
 **¿Cuántos pasos se han ejecutado?**
 # RESPONDER 
+Se han ejecutado 6 pasos, uno por cada instrucción del Dockerfile. Sin embargo en el enlace resultante de la construcción de la imagen se muestra la ejecución de 9 pasos.
+
+<img width="926" height="93" alt="image" src="https://github.com/user-attachments/assets/b7b5af4d-3e44-4e62-8069-3fcdf1ddd360" />
 
 ### Inspeccionar la imagen creada
 # COMPLETAR CON UNA CAPTURA
+<img width="789" height="923" alt="image" src="https://github.com/user-attachments/assets/bdaa03f2-9ecd-4ca6-8edb-145a459d2128" />
+
 
 **Modificar el archivo index.html para incluir su nombre y luego crear una nueva versión de la imagen anterior**
 **¿Cuántos pasos se han ejecutado? ¿Observa algo diferente en la creación de la imagen**
+En esta segunda construcción también se mostraron 9 pasos, pero solo 7 se ejecutaron realmente y 2 se reutilizaron desde la caché, ya que Docker detectó que no hubo cambios en esas capas. Sin embargo, en cuanto a análisis sólo el COPY, EXPOSE y CMD se ejecutaron por la reutilizaron de la caché.
+Como resultado, la segunda creación fue mucho más rápida. Esto demuestra el mecanismo de caché de Docker, que evita repetir pasos innecesarios y acelera la generación de imágenes cuando el contenido previo no ha cambiado.
+
+
+<img width="951" height="93" alt="image" src="https://github.com/user-attachments/assets/35b0cd6e-3a6f-4a39-9667-632de45a2bdb" />
+
 
 ## Mecanismo de caché
 Docker usa un mecanismo de caché cuando crea imágenes para acelerar el proceso de construcción y evitar la repetición de pasos que no han cambiado. Cada instrucción en un Dockerfile crea una capa en la imagen final. Docker intenta reutilizar las capas de una construcción anterior si no han cambiado, lo que reduce significativamente el tiempo de construcción.
@@ -75,14 +86,16 @@ Docker usa un mecanismo de caché cuando crea imágenes para acelerar el proceso
 
 ### Crear un contenedor a partir de las imagen creada, mapear todos los puertos
 ```
-
+docker run -d -p 80:80 miapache:1.0
 ```
 
 ### ¿Con que puerto host se está realizando el mapeo?
 # COMPLETAR CON LA RESPUESTA
+El puerto 80 del host está mapeado al 80 del contenedor. 
 
 **¿Qué es una imagen huérfana?**
 # COMPLETAR CON LA RESPUESTA
+Es una imagen que no tiene etiqueta (tag) o ya no está utilizada por ningún contenedor activo.
 
 ### Identificar imágenes huérfanas
 ```
