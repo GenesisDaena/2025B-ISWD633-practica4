@@ -11,6 +11,16 @@ Asignar núcleos de CPU específicos:
 
 **¿Como saber el numero de procesadores virtuales que tiene una máquina?**
 ## COMPLETAR
+Ya que el número de procesadores virtuales de una máquina se corresponde con el número de procesadores lógicos detectados por el sistema operativo.
+Se puede usar los siguientes comandos:<br>
+Muestra cuántos núcleos físicos y cuántos procesadores lógicos tiene.
+```
+wmic cpu get NumberOfCores,NumberOfLogicalProcessors
+```
+O también, el siguiente comando que devuelve directamente el número total de procesadores lógicos.
+```
+echo %NUMBER_OF_PROCESSORS%
+```
 
 ## Ejemplos
 _Puedes copiar y ejecutar directamente cada uno de los comandos_
